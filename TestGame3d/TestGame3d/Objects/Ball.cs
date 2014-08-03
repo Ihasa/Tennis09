@@ -872,7 +872,6 @@ namespace Tennis01.Objects
             GameMain.debugStr["ballSpeedXZ"] = (new Vector2(speed.X,speed.Z).Length()/0.27f * 60 * 3600 / 1000) + "km/h";
             GameMain.debugStr["ballSpin"] = spin + "rot/sec";
             GameMain.debugStr["ballBounds"] = Bounds + "";
-            
             base.Update(gameTime);
         }
         //private void showShadow()
@@ -968,11 +967,11 @@ namespace Tennis01.Objects
             float factor = 1;
             if (spin > 0)
             {
-                factor *= MathHelper.Lerp(1, 1.4f, spin / 90.0f);
+                factor *= MathHelper.Lerp(1, 1.3f, spin / 60.0f);
             }
             else
             {
-                factor *= MathHelper.Lerp(1, 0.8f, -spin / 90.0f);
+                factor *= MathHelper.Lerp(1, 0.8f, -spin / 60.0f);
             }
             speed.X *= factor;
             speed.Z *= factor;

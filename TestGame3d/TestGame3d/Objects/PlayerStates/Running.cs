@@ -16,6 +16,7 @@ namespace Tennis01.Objects.PlayerStates
         }
         public override void Update(ControllerState controlerState)
         {
+            Player.RotationX = (float)Math.PI / 16;
             Vector2 joyStick = controlerState.JoyStick;
             joyStick.Y = -joyStick.Y;
 

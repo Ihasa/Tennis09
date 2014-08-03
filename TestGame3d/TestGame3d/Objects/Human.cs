@@ -340,7 +340,9 @@ namespace Tennis01.Objects
         protected Matrix HandMatrix()
         {
             Vector3 offset = new Vector3(-0.04f, -0.02f, 0);
-            return Matrix.CreateTranslation(offset) * animationPlayer.GetWorldTransforms()[12] * Matrix.CreateRotationY(rotation.Y) * Matrix.CreateTranslation(position);
+            return Matrix.CreateTranslation(offset) * animationPlayer.GetWorldTransforms()[12] * 
+                Matrix.CreateRotationX(rotation.X)*Matrix.CreateRotationY(rotation.Y) * Matrix.CreateRotationZ(rotation.Z) * 
+                Matrix.CreateTranslation(position);
         }
         /// <summary>
         /// indexとその子ボーンをtransformで変換させる。Y軸回転以外はやらないほうがいいかも

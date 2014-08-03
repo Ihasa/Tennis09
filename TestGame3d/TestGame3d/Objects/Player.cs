@@ -67,7 +67,7 @@ namespace Tennis01.Objects
         const float angleY = 20;//打球角度
         static float spinSpeed = 80;//通常の打球速度
         public static float Rate = 1.0f;
-        public static int Delay = 6;
+        public static int Delay = 7;
         const float sliceSpeed = 65;//スライスの速度
         const float dropDepth = 0.3f;//ドロップの精度(基準)
         const float dropFrames = 50; //ドロップは最短何フレームで到着するか
@@ -171,6 +171,7 @@ namespace Tennis01.Objects
         public Vector2 BodyDirection { get { return bodyDirection; } set { bodyDirection = value; } }
         public Vector3 Rotation { get { return rotation; } set { rotation = value; } }
         public float RotationY { get { return Rotation.Y; } set { rotation.Y = value; } }
+        public float RotationX { set { rotation.X = value; } }
         public Vector3 DistanceToBall
         {
             get
@@ -278,7 +279,7 @@ namespace Tennis01.Objects
         #region 操作
         public void Toss()
         {
-            ball.Toss(hitBounds.Y - ball.Position.Y);
+            ball.Toss(hitBounds.Y - ball.Position.Y+0.1f);
         }
         public void SetToServerPosition(CourtSide side,TennisEvents events)
         {
@@ -379,14 +380,14 @@ namespace Tennis01.Objects
         public void FireRacket(Vector3 color)
         {
             swing.EmitPoint = (Matrix.CreateTranslation(new Vector3(0, 0, ArmLength + racketLength)) * HandMatrix()).Translation;
-            swing.InitialVelocity = 0f;
+            //swing.InitialVelocity = 0;
             //sliding.InitialTexture = GameMain.Textures["smoke"];
             swing.InitialColor = swing.FinalColor = color;
             swing.Emit();
         }
 
         int currentDelay = 0;
-        int maxDelay = 30;
+        int maxDelay = 22;
         public bool OnSmashPoint()
         {
             return HasSmashPoint && Hit(new HitVolume(smashPoint.EmitPoint+Vector3.Up * 0.27f,smashPoint.Scale/4,0.27f*2,smashPoint.Scale/4));
@@ -494,7 +495,7 @@ namespace Tennis01.Objects
                     }
                 }
             }
-            if (Ball.GetFrames(HitBounds.Y) > delay)
+            if (Ball.Bounds < 2 && Ball.GetFrames(HitBounds.Y) > delay)
             {
                 Jump(delay*2);
                 //Jump(MathHelper.Clamp(Ball.Position.Y - HitBounds.Y, 0, 0.27f));
@@ -672,6 +673,7 @@ namespace Tennis01.Objects
             StartAnimation(nextState.AnimationName, nextState.AnimationStartTime, nextState.AnimationStartTime2);
             //新状態へ
             playerState = nextState;
+            Rotation = new Vector3(0,Rotation.Y,0);
         }
         public void Play()
         {
@@ -764,7 +766,7 @@ namespace Tennis01.Objects
                     {
                         //つなぎストローク
                         //ShotBall(joyStick, /*ball.GetMinAngle(depth)/10 + 10 + spin / 3*/ball.GetSafetyAngle(height, depth), depth, spin * rate);
-                        spinShot(joyStick, getDepth(0.4f, 0.99f), distanceFactor, rButtonIsDown);
+                        spinShot(joyStick, getDepth(0.5f, 0.99f), distanceFactor, rButtonIsDown);
                     }
                     else
                     {
@@ -1009,8 +1011,8 @@ namespace Tennis01.Objects
             float velocity = spinSpeed * 1000.0f.ResizeVelocity() * Rate * 0.95f;
             float height = Math.Abs(ball.Speed.Y / ball.BoundVelocity.Y)*Rate;
             if (ball.Speed.Y < 0)
-                height *= 0.75f;
-            velocity *= 0.45f + (1 - height) * 0.65f + 0.2f * ability.Power * (DistanceToBall.X < 0 ? ability.BackHand : 1);
+                height *= 0.5f;
+            velocity *= 0.4f + (1 - height) * 0.6f + 0.3f * ability.Power * (DistanceToBall.X < 0 ? ability.BackHand : 1);
             //velocity *= Math.Abs(ball.Speed.Y / ball.BoundVelocity.Y) <= 0.5f ? 1 + 0.1f * (ability.Power) : 0.75f;
             if (ball.Position.Y >= ShoulderY)
             {
@@ -1557,7 +1559,6 @@ namespace Tennis01.Objects
             if (position.Y < 0)
                 position.Y = 0;
             speed.Y = (float)Math.Sqrt(2 * Ball.Gravity * height);
-
         }
         public void Jump(int frames)
         {

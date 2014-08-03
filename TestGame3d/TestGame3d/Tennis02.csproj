@@ -142,6 +142,7 @@
     <Compile Include="GameConfig.Designer.cs">
       <DependentUpon>GameConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Input\AIController.cs" />
     <Compile Include="Input\MouseController.cs" />
     <Compile Include="Input\TestAIControler.cs" />
     <Compile Include="Input\TestKinectControler2.cs" />
@@ -171,8 +172,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Objects\PlayerAbility.cs" />
+    <Compile Include="Objects\PlayerStates\Jumping2.cs" />
     <Compile Include="Objects\PlayerStates\Diving.cs" />
     <Compile Include="Objects\PlayerStates\Helicopter.cs" />
+    <Compile Include="Objects\PlayerStates\Jumping.cs" />
     <Compile Include="Objects\PlayerStates\PlayerState.cs" />
     <Compile Include="Objects\PlayerStates\Result.cs" />
     <Compile Include="Objects\PlayerStates\Running.cs" />

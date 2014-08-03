@@ -48,7 +48,11 @@ namespace Tennis01.Objects.PlayerStates
             }
             else if (controlerState.JoyStick.Length() != 0)
             {
-                NextState = new Running(Player);    
+                NextState = new Running(Player);
+            }
+            else if (controlerState.Back == ControlerButtonStates.Pressed)
+            {
+                NextState = new Jumping(Player,60);
             }
             //アニメーション変更
             string animation = Player.GetStandAnimation();

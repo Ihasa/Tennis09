@@ -215,15 +215,20 @@ namespace Tennis01.Input
                             }
                             else//ストロークで返す
                             {
-                                if (Math.Abs(enemyPlayer.Position.Z) >= TennisCourt.CourtLength*1.25f)
+                                if (Math.Abs(enemyPlayer.Position.Z) >= TennisCourt.CourtLength * 1.25f)
                                 {
                                     res.Button4 = res.R = ControlerButtonStates.Pressed;
                                 }
-                                else if (GameMain.Random.Next(0, 2) == 0)
-                                    res.Button1 = ControlerButtonStates.Pressed;
                                 else
-                                    res.Button4 = ControlerButtonStates.Pressed; 
-                              
+                                {
+                                    int rand = GameMain.Random.Next(0, 3);
+                                    if (rand == 0)
+                                        res.Button1 = ControlerButtonStates.Pressed;
+                                    else if (rand == 1)
+                                        res.Button4 = ControlerButtonStates.Pressed;
+                                    else
+                                        res.Button2 = ControlerButtonStates.Pressed;
+                                }
                             }
                         }
 

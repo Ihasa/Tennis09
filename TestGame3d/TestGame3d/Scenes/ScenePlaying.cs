@@ -200,9 +200,9 @@ namespace Tennis01.Scenes
             //Controlers[0] = new TestKinectControler3(0,players[0],ball);//腕がジョイスティック
             //Controlers[0] = new TestKinectControler2(0,players[0], players[1], ball);//腕を振ってショット。移動は自動
             //Controlers[0] = new TestKinectControler(0);//腕で操作、ショット
-            //Controllers[0] = new TestAIControler(players[0],players[1], ball,0,0,(int)(3 / Player.Rate/Player.Rate));
+            //Controllers[0] = new TestAIControler(players[0],players[1], ball,0,0,(int)(0 / Player.Rate/Player.Rate));
             //Controllers[0] = new WiimoteController(players[0],WiimoteLib.InputReport.IRExtensionAccel);
-            Controllers[2] = new TestAIControler(players[1], players[0], ball,0,0,(int)(2 / Player.Rate / Player.Rate));
+            Controllers[2] = new TestAIControler(players[1], players[0], ball,0,0,(int)(0 / Player.Rate / Player.Rate));
             //Controlers[1] = new WiimoteController(camera, WiimoteLib.InputReport.IRExtensionAccel);
             //Controlers[0] = new MouseController(players[0]);
             

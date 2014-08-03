@@ -13,7 +13,7 @@ namespace Tennis01.Scenes
     {
         Ball currentBall;
         List<Ball> balls;
-        int ballMax = 5;
+        int ballMax = 10;
         int current = 0;
         Menu menu;
         Cursor cursor;

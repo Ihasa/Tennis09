@@ -33,7 +33,7 @@ namespace Tennis01.Objects.PlayerStates
             TimeSpan swingStart = new TimeSpan();
             AnimationName = player.GetSwingAnimation(controlerState, ref delay, out swingStart);
             AnimationStartTime = swingStart;
-            swingingTime = delay + 30 + (int)(player.Velocity * 25);
+            swingingTime = delay + 30 + (int)(player.Velocity * 20);
 
             frames = 0;// swingingTime;
             slidingSpeed = speed;
@@ -63,6 +63,7 @@ namespace Tennis01.Objects.PlayerStates
         int threshold = 5;
         public override void Update(Input.ControllerState controlerState)
         {
+            Player.RotationX = (float)Math.PI / 8;
             if (Player.OnSmashPoint() && frames <= delay && AnimationName == "Animation_3")
             {
                 Vector3 posi = Vector3.Lerp(Player.SwingStartPosition, Player.SmashPoint.EmitPoint, (float)frames / delay);
